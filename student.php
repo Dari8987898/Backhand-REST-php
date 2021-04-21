@@ -25,23 +25,12 @@ switch($metodo) {
     $js_decoded = json_decode($body, true);
     
     if(isset($js_decoded["_id"])) {
-      $bool = $studente->find($js_decoded["_id"]);
-      if(!$bool) {
-        $bool = $studente->addStudent($js_decoded["_id"], $js_decoded["_name"], $js_decoded["_surname"], $js_decoded["_sidiCode"], $js_decoded["_taxCode"]);
-        $esitoInserimento = $bool ? "Studente inserito con successo" :  "Errore nell'inserimento!";
-        echo $esitoInserimento;
-      } else {
-        echo "ID già in utilizzo";
-      }
+      $bool = $studente->addStudent($js_decoded["_name"], $js_decoded["_surname"], $js_decoded["_sidiCode"], $js_decoded["_taxCode"]);
+      $esitoInserimento = $bool ? "Studente inserito con successo" :  "Errore nell'inserimento!";
+      echo $esitoInserimento;
     } else {
-      $id =  $studente->getId();
-      $bool = $studente->find($js_decoded["_id"]);
-      if(!$bool) {
-        $$bool = $studente->addStudent($id, $js_decoded["_name"], $js_decoded["_surname"], $js_decoded["_sidiCode"], $js_decoded["_taxCode"]);
-        $esitoInserimento = $bool ? "Studente inserito con successo" :  "Errore nell'inserimento!";
-      }else{
-        echo "ID già in utilizzo";
-      }
+      $bool = $studente->addStudent($id, $js_decoded["_name"], $js_decoded["_surname"], $js_decoded["_sidiCode"], $js_decoded["_taxCode"]);
+      $esitoInserimento = $bool ? "Studente inserito con successo" :  "Errore nell'inserimento!";
     }
     break;
 
